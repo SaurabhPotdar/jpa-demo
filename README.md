@@ -11,6 +11,8 @@ private Set<Order> orders;
 ```
 @JsonManagedReference //Parent
 @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+@EqualsAndHashCode.Exclude
+@ToString.Exclude
 private Set<Order> orders;
 ```
 ```
