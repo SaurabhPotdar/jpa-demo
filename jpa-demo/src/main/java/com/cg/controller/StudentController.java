@@ -54,10 +54,18 @@ public class StudentController {
 		return new ResponseEntity<>(courseRepository.save(course), HttpStatus.OK);
 	}
 	
+	/**
+	 * 
+	 * @param firstName
+	 * @param lastName
+	 * @param page Page number
+	 * @param size No of elements in each page
+	 * @return
+	 */
 	@GetMapping(value = "/search")
-	public ResponseEntity<?> findByName(@RequestParam String firstName, @RequestParam String lastName) {
+	public ResponseEntity<?> findByName(@RequestParam String firstName, @RequestParam String lastName, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
 		//return new ResponseEntity<>(studentRepository.findByLastnameOrFirstnameNamedQuery(firstName, lastName), HttpStatus.OK);
-		return new ResponseEntity<>(studentRepository.findByName(firstName, lastName), HttpStatus.OK);
+		return new ResponseEntity<>(studentRepository.findByName(firstName, lastName, page, size), HttpStatus.OK);
 	}
 
 }
