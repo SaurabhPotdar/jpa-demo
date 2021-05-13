@@ -21,3 +21,13 @@ private Set<Order> orders;
 @JoinColumn(name = "customer_id")
 private Customer customer;
 ```
+3) Saving ManyToOne
+```
+Customer customer = customerRepository.findById(customerId).orElse(null);
+order.setCustomer(customer);
+Set<Order> orders = customer.getOrders();
+orders.add(order);
+customer.setOrders(orders);
+//Cascade on customer, so we just need to save customer
+return new ResponseEntity<>(customerRepository.save(customer),HttpStatus.OK);
+```
