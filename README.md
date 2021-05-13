@@ -38,7 +38,8 @@ By default, the JPA ```@ManyToOne```(e.g one order has one customer) and ```@One
 
 6) Many to Many circular dependency </br>
 Use [@JsonIgnoreProperties](https://stackoverflow.com/a/60176449/12021132) </br>
-We can also use ```@JsonIgnore``` to just prevent serializing of that property.
+We can also use ```@JsonIgnore``` to just prevent serializing of that property. </br>
+Make sure to use ```@EqualsAndHashCode.Exclude``` for Set
 ```
 @JsonIgnoreProperties("students")
 @ManyToMany(mappedBy = "students")
