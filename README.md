@@ -37,7 +37,7 @@ return new ResponseEntity<>(customerRepository.save(customer),HttpStatus.OK);
 By default, the JPA ```@ManyToOne```(e.g one order has one customer) and ```@OneToOne``` annotations are fetched EAGERly, while the ```@OneToMany``` and ```@ManyToMany``` relationships are considered LAZY.(e.g customer is loaded but orders are loaded only when needed)
 
 6) Many to Many circular dependency </br>
-If we are using List, [@JsonIgnoreProperties](https://stackoverflow.com/a/60176449/12021132) </br>
+Use [@JsonIgnoreProperties](https://stackoverflow.com/a/60176449/12021132) </br>
 We can also use ```@JsonIgnore``` to just prevent serializing of that property.
 ```
 @JsonIgnoreProperties("students")
