@@ -32,8 +32,11 @@ public class Student {
 	@Column(name = "student_id")
 	private int id;
 
-	@Column(name = "student_name")
-	private String name;
+	@Column(name = "student_firstname")
+	private String firstName;
+	
+	@Column(name = "student_lastname")
+	private String lastName;
 
 	@JsonIgnoreProperties("students")
 	@ManyToMany(mappedBy = "students")

@@ -1,5 +1,7 @@
 # Reference
 
+[Doc](https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/Hibernate_User_Guide.html#associations-many-to-one)
+
 1. Problems when calculating hashcode/toString using Lombok for circular dependencies([Issue](https://github.com/projectlombok/lombok/issues/1007)): 
 ```
 @EqualsAndHashCode.Exclude
@@ -23,7 +25,7 @@ private Set<Order> orders;
 @JoinColumn(name = "customer_id")
 private Customer customer;
 ```
- Saving ManyToOne
+Saving ManyToOne
 ```
 Customer customer = customerRepository.findById(customerId).orElse(null);
 order.setCustomer(customer);
@@ -57,3 +59,4 @@ private Set<Course> courses = new HashSet<>();
 @JoinTable(name="student_course", joinColumns = {@JoinColumn(name="course_id")}, inverseJoinColumns = {@JoinColumn(name="student_id")})
 private Set<Student> students = new HashSet<>();
 ```
+6. [JPA queries](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)

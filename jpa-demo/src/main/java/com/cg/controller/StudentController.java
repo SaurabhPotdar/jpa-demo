@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.dto.Course;
@@ -51,6 +52,12 @@ public class StudentController {
 		course.setStudents(students);
 		//Cascade is on course
 		return new ResponseEntity<>(courseRepository.save(course), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/search")
+	public ResponseEntity<?> findByName(@RequestParam String firstName, @RequestParam String lastName) {
+		//return new ResponseEntity<>(studentRepository.findByLastnameOrFirstnameNamedQuery(firstName, lastName), HttpStatus.OK);
+		return new ResponseEntity<>(studentRepository.findByName(firstName, lastName), HttpStatus.OK);
 	}
 
 }
