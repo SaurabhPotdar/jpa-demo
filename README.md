@@ -1,4 +1,4 @@
-# Issues and fixes
+# Reference
 
 1) Problems when calculating hashcode/toString using Lombok for circular dependencies([Issue](https://github.com/projectlombok/lombok/issues/1007)): 
 ```
@@ -31,3 +31,6 @@ customer.setOrders(orders);
 //Cascade on customer, so we just need to save customer
 return new ResponseEntity<>(customerRepository.save(customer),HttpStatus.OK);
 ```
+4) Fetching strategy <br/>
+By default, the JPA ```@ManyToOne```(e.g one order has one customer) and ```@OneToOne``` annotations are fetched EAGERly, while the ```@OneToMany``` and ```@ManyToMany``` relationships are considered LAZY.(e.g customer is loaded but orders are loaded only when needed)
+
