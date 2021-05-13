@@ -1,15 +1,15 @@
 # Reference
 
-1) Problems when calculating hashcode/toString using Lombok for circular dependencies([Issue](https://github.com/projectlombok/lombok/issues/1007)): 
+1. Problems when calculating hashcode/toString using Lombok for circular dependencies([Issue](https://github.com/projectlombok/lombok/issues/1007)): 
 ```
 @EqualsAndHashCode.Exclude
 @ToString.Exclude
 private Set<Order> orders;
 ```
 
-2) [Bidirectional circular relationships](https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion)
+2. [Bidirectional circular relationships](https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion)
 
-3) JSON recursive dependency (circular dependency) [Reference](http://springquay.blogspot.com/2016/01/new-approach-to-solve-json-recursive.html)
+3. Many to One recursive dependency (circular dependency) [Reference](http://springquay.blogspot.com/2016/01/new-approach-to-solve-json-recursive.html)
 ```
 @JsonManagedReference //Parent
 @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -23,7 +23,7 @@ private Set<Order> orders;
 @JoinColumn(name = "customer_id")
 private Customer customer;
 ```
-4) Saving ManyToOne
+ Saving ManyToOne
 ```
 Customer customer = customerRepository.findById(customerId).orElse(null);
 order.setCustomer(customer);
@@ -33,10 +33,10 @@ customer.setOrders(orders);
 //Cascade on customer, so we just need to save customer
 return new ResponseEntity<>(customerRepository.save(customer),HttpStatus.OK);
 ```
-5) Fetching strategy <br/>
+4. Fetching strategy <br/>
 By default, the JPA ```@ManyToOne```(e.g one order has one customer) and ```@OneToOne``` annotations are fetched EAGERly, while the ```@OneToMany``` and ```@ManyToMany``` relationships are considered LAZY.(e.g customer is loaded but orders are loaded only when needed)
 
-6) Many to Many circular dependency </br>
+5. Many to Many circular dependency </br>
 Use [@JsonIgnoreProperties](https://stackoverflow.com/a/60176449/12021132) </br>
 We can also use ```@JsonIgnore``` to just prevent serializing of that property. </br>
 Make sure to use ```@EqualsAndHashCode.Exclude``` for Set
