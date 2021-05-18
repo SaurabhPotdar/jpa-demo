@@ -45,7 +45,7 @@ public class Course {
 	@ToString.Exclude
 	//Create a new table "student_course" with one colm from Course and one from Student
 	//This table will keep track of many to many
-	@JoinTable(name="student_course", joinColumns = {@JoinColumn(name="course_id")}, inverseJoinColumns = {@JoinColumn(name="student_id")})
+	@JoinTable(name="course_student", joinColumns = {@JoinColumn(name="course_id")}, inverseJoinColumns = {@JoinColumn(name="student_id")})
 	private Set<Student> students = new HashSet<>();
 
 }
