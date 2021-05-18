@@ -60,3 +60,12 @@ private Set<Course> courses = new HashSet<>();
 private Set<Student> students = new HashSet<>();
 ```
 6. [JPA queries](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)
+
+7. @Transactional</br>
+ Changes are saved to the database only if all the instructions are executed in the method. Rollback any changes if an error occurs.</br>
+ We can annotate individual methods or the entire class(all methods run with @Transactional).
+```
+@Transactional
+public void addCourse(Course course) {
+}
+```
