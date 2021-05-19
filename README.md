@@ -59,7 +59,8 @@ private Set<Course> courses = new HashSet<>();
 @JoinTable(name="student_course", joinColumns = {@JoinColumn(name="course_id")}, inverseJoinColumns = {@JoinColumn(name="student_id")})
 private Set<Student> students = new HashSet<>();
 ```
-6. [JPA queries](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)
+6. [JPA queries](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)</br>
+findBy, getBy, queryBy, readBy all generate the same criteria query. removeBy, deleteBy is also same [Reference](https://stackoverflow.com/questions/39869707/what-is-the-difference-between-query-methods-find-by-read-by-query-by-and-get)
 
 7. @Transactional</br>
  Changes are saved to the database only if all the instructions are executed in the method. Rollback any changes if an error occurs.</br>
@@ -69,3 +70,4 @@ private Set<Student> students = new HashSet<>();
 public void addCourse(Course course) {
 }
 ```
+8. [getOne vs findById](https://www.javacodemonk.com/difference-between-getone-and-findbyid-in-spring-data-jpa-3a96c3ff)
