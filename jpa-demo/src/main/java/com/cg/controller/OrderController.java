@@ -33,12 +33,12 @@ public class OrderController {
 		return new ResponseEntity<>(orderRepository.findById(id).orElse(null), HttpStatus.OK);
 	}
 	
-	@GetMapping(value="")
+	@GetMapping()
 	public ResponseEntity<?> findAll() {
 		return new ResponseEntity<>(orderRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@PostMapping(value="")
+	@PostMapping()
 	public ResponseEntity<?> addCourse(@RequestBody Order order, @RequestParam("customerId") int customerId) {
 		Customer customer = customerRepository.findById(customerId).orElse(null);
 		order.setCustomer(customer);

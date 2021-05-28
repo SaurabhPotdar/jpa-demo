@@ -25,12 +25,12 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(customerRepository.findById(id).orElse(null), HttpStatus.OK);
 	}
 	
-	@GetMapping(value="")
+	@GetMapping()
 	public ResponseEntity<?> findAll() {
 		return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@PostMapping(value="")
+	@PostMapping()
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
 		return new ResponseEntity<>(customerRepository.save(customer),HttpStatus.OK);
 	}

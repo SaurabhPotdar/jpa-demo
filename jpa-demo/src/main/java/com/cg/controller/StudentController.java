@@ -33,12 +33,12 @@ public class StudentController {
 		return new ResponseEntity<>(studentRepository.findById(id).orElse(null), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "")
+	@GetMapping()
 	public ResponseEntity<?> findAll() {
 		return new ResponseEntity<>(studentRepository.findAll(), HttpStatus.OK);
 	}
 
-	@PostMapping(value = "")
+	@PostMapping()
 	public ResponseEntity<?> addStudent(@RequestBody Student student) {
 		return new ResponseEntity<>(studentRepository.save(student), HttpStatus.OK);
 	}

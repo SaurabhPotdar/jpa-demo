@@ -25,12 +25,12 @@ public class CourseController {
 		return new ResponseEntity<Course>(courseRepository.findById(id).orElse(null), HttpStatus.OK);
 	}
 	
-	@GetMapping(value="")
+	@GetMapping()
 	public ResponseEntity<?> findAll() {
 		return new ResponseEntity<>(courseRepository.findAll(), HttpStatus.OK);
 	}
 	
-	@PostMapping(value="")
+	@PostMapping()
 	public ResponseEntity<?> addCourse(@RequestBody Course course) {
 		return new ResponseEntity<>(courseRepository.save(course),HttpStatus.OK);
 	}
