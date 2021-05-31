@@ -12,10 +12,8 @@ import com.cg.dto.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
+	//Declarative query
 	List<Student> findByFirstNameOrLastNameOrderByFirstNameDesc(String firstName, String lastName, Pageable pageable);
-
-	@Query("select s from Student s where s.firstName = :firstName or s.lastName = :lastName")
-	Student findByLastnameOrFirstnameNamedQuery(@Param("firstName") String firstname, @Param("lastName") String lastname);
 	
 	//Create a default method with a descriptive name to avoid using very long jpa query method names
 	//Or use @Query with a descriptive method name
@@ -23,5 +21,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 		return findByFirstNameOrLastNameOrderByFirstNameDesc(firstName, lastName, PageRequest.of(page, size));
 	}
 	
+	@Query("select s from Student s where s.firstName = :firstName or s.lastName = :lastName")
+	List<Student> findByLastnameOrFirstnameNamedQuery(@Param("firstName") String firstname, @Param("lastName") String lastname, Pageable pageable);
 
 }

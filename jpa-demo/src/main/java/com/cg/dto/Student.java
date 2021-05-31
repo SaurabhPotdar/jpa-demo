@@ -43,5 +43,11 @@ public class Student {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Set<Course> courses = new HashSet<>();
+	
+	public Student(String firstName, String lastName, Set<Course> courses) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.courses = courses;
+	}
 
 }
