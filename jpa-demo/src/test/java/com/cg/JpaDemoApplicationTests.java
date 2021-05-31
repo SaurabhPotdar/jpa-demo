@@ -38,7 +38,7 @@ class JpaDemoApplicationTests {
 	
 	@Test
 	void testFindByLastnameOrFirstnameNamedQuery() {
-		assertEquals(2, studentRepository.findByLastnameOrFirstnameNamedQuery("AB", "GH", PageRequest.of(1, 10)));
+		assertEquals(2, studentRepository.findByLastnameOrFirstnameNamedQuery("AB", "GH", PageRequest.of(0, 10)).size());
 	}
 
 }
