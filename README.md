@@ -2,6 +2,8 @@
 
 [Documentation](https://docs.jboss.org/hibernate/orm/5.1/userguide/html_single/Hibernate_User_Guide.html#associations-many-to-one)
 
+[Multiple Datasources](https://stackoverflow.com/a/48140893/12021132)
+
 1. Problems when calculating hashcode/toString using Lombok for circular dependencies([Issue](https://github.com/projectlombok/lombok/issues/1007)): 
 ```
 @EqualsAndHashCode.Exclude
