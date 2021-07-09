@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Arrays;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ class JpaDemoApplicationTests {
 				new Student("IJ","KL",null),
 				new Student("MN","OP",null)));
 	}
+	
+	@AfterEach
+	public void delete() {
+		studentRepository.deleteAll();
+	}
 
 	@Test
 	void testFindAll() {
@@ -38,7 +44,14 @@ class JpaDemoApplicationTests {
 	
 	@Test
 	void testFindByLastnameOrFirstnameNamedQuery() {
+		assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
 		assertEquals(2, studentRepository.findByLastnameOrFirstnameNamedQuery("AB", "GH", PageRequest.of(0, 10)).size());
+	}
+	
+	@Test
+	void testFindByName() {
+		assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
+		assertEquals(2, studentRepository.findByName("AB", "GH", 0, 10).size());
 	}
 
 }
