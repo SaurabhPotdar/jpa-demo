@@ -18,6 +18,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	//Create a default method with a descriptive name to avoid using very long jpa query method names
 	//Or use @Query with a descriptive method name
 	default List<Student> findByName(String firstName, String lastName, int page, int size) {
+		//https://www.baeldung.com/spring-data-jpa-pagination-sorting
+		//PageRequest.of(0, 5, Sort.by("price").descending().and(Sort.by("name")));
 		return findByFirstNameOrLastNameOrderByFirstNameDesc(firstName, lastName, PageRequest.of(page, size));
 	}
 	
