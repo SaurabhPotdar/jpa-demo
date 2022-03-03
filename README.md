@@ -73,3 +73,4 @@ public void addCourse(Course course) {
 }
 ```
 8. [getOne vs findById](https://www.javacodemonk.com/difference-between-getone-and-findbyid-in-spring-data-jpa-3a96c3ff)
+9. [Pagination and Sorting](https://www.baeldung.com/spring-data-jpa-pagination-sorting)
