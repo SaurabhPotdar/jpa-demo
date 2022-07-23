@@ -1,25 +1,32 @@
 package com.cg;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.util.Arrays;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.cg.constants.Constants;
+import com.cg.dto.Employee;
+import com.cg.dto.Student;
+import com.cg.repository.EmployeeRepository;
+import com.cg.repository.StudentRepository;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
-import com.cg.dto.Student;
-import com.cg.repository.StudentRepository;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 class JpaDemoApplicationTests {
 	
 	@Autowired
 	private StudentRepository studentRepository;
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@BeforeEach
 	public void init() {
@@ -53,5 +60,48 @@ class JpaDemoApplicationTests {
 		assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
 		assertEquals(2, studentRepository.findByName("AB", "GH", 0, 10).size());
 	}
+
+	@Nested
+	@DisplayName("Employee Tests")
+	@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+	class EmployeeTests {
+
+		Pageable pageable;
+
+		@BeforeAll
+		void init() {
+			pageable = Pageable.unpaged();
+			employeeRepository.saveAll(Arrays.asList(
+					new Employee(1, "John", "Manager", 100000L),
+					new Employee(2, "Jane", "Developer", 200000L),
+					new Employee(3, "Jack", "Developer", 300000L),
+					new Employee(4, "Jill", "Manager", 400000L)));
+		}
+
+		private List<Employee> getEmployees(final Map<String, String> filters) {
+			return employeeRepository.findAll(EmployeeRepository.FiltersUtils.findBy(filters), pageable).getContent();
+		}
+
+		@Test
+		@DisplayName("Find by name")
+		void testFindByName() {
+			final Map<String, String> filters = new HashMap<>();
+			filters.put(Constants.NAME, "John");
+			final List<Employee> employees = getEmployees(filters);
+			assertEquals(1, employees.size());
+		}
+
+		@Test
+		@DisplayName("Find by designation and salary")
+		void testFindAll() {
+			final Map<String, String> filters = new HashMap<>();
+			filters.put(Constants.DESIGNATION, "Developer");
+			filters.put(Constants.SALARY, "200000");
+			final List<Employee> employees = getEmployees(filters);
+			assertEquals(2, employees.size());
+		}
+
+	}
+
 
 }
