@@ -33,18 +33,13 @@ class JpaDemoApplicationTests {
 		@Autowired
 		private StudentRepository studentRepository;
 
-		@BeforeEach
+		@BeforeAll
 		public void init() {
 			studentRepository.saveAll(Arrays.asList(
 					new Student("AB","CD",null),
 					new Student("EF","GH",null),
 					new Student("IJ","KL",null),
 					new Student("MN","OP",null)));
-		}
-
-		@AfterEach
-		public void delete() {
-			studentRepository.deleteAll();
 		}
 
 		@Test
@@ -56,13 +51,15 @@ class JpaDemoApplicationTests {
 
 		@Test
 		void testFindByLastnameOrFirstnameNamedQuery() {
-			assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
+			//In the previous tests, we added an entry to the table.
+			//But here the count is still 4, as each test is transactional and rolls back.
+			assertEquals(4, studentRepository.count());
 			assertEquals(2, studentRepository.findByLastnameOrFirstnameNamedQuery("AB", "GH", PageRequest.of(0, 10)).size());
 		}
 
 		@Test
 		void testFindByName() {
-			assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
+			assertEquals(4, studentRepository.count());
 			assertEquals(2, studentRepository.findByName("AB", "GH", 0, 10).size());
 		}
 

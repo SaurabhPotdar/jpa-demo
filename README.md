@@ -37,10 +37,10 @@ customer.setOrders(orders);
 //Cascade on customer, so we just need to save customer
 return new ResponseEntity<>(customerRepository.save(customer),HttpStatus.OK);
 ```
-4. Fetching strategy <br/>
+4. Fetching strategy\
 By default, the JPA ```@ManyToOne```(e.g one order has one customer) and ```@OneToOne``` annotations are fetched EAGERly, while the ```@OneToMany``` and ```@ManyToMany``` relationships are considered LAZY.(e.g customer is loaded but orders are loaded only when needed)
 
-5. Many to Many circular dependency </br>
+5. Many to Many circular dependency\
 Use [@JsonIgnoreProperties](https://stackoverflow.com/a/60176449/12021132) </br>
 We can also use ```@JsonIgnore``` to just prevent serializing of that property. </br>
 Make sure to use ```@EqualsAndHashCode.Exclude``` for Set
@@ -64,11 +64,13 @@ private Set<Student> students = new HashSet<>();
 6. [JPA queries](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)</br>
 findBy, getBy, queryBy, readBy all generate the same criteria query. removeBy, deleteBy is also same [Reference](https://stackoverflow.com/questions/39869707/what-is-the-difference-between-query-methods-find-by-read-by-query-by-and-get)
 
-7. @Transactional</br>
+7. ```@Transactional```\
+   ```@Transactional(readOnly=true)``` For readonly queries\
+ If we have reader-writer configuration for our db, then readOnly=true will hit reader db.\
  Changes are saved to the database only if all the instructions are executed in the method. Rollback any changes if an error occurs.</br>
  We can annotate individual methods or the entire class(all methods run with @Transactional).
 ```
-@Transactional
+@Transactional(readOnly=true)
 public void addCourse(Course course) {
 }
 ```
@@ -76,3 +78,4 @@ public void addCourse(Course course) {
 9. [Pagination and Sorting](https://www.baeldung.com/spring-data-jpa-pagination-sorting)
 10. [JPA Specification](https://medium.com/@cmmapada/advanced-search-and-filtering-using-spring-data-jpa-specification-and-criteria-api-b6e8f891f2bf)
 11. [Projection](https://www.baeldung.com/spring-data-jpa-projections)
+12. ```@DataJpaTest``` Each test is transactional and rolls back, so just enter all data using ```@BeforeAll```
