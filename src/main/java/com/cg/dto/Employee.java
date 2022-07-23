@@ -1,16 +1,16 @@
 package com.cg.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Employee {
 
     @Id
@@ -18,7 +18,9 @@ public class Employee {
     @Column(name = "id")
     private int id;
 
-    private String name;
+    private String firstName;
+
+    private String lastName;
 
     private String designation;
 

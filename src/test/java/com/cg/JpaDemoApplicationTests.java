@@ -2,9 +2,11 @@ package com.cg;
 
 import com.cg.constants.Constants;
 import com.cg.dto.Employee;
+import com.cg.dto.EmployeeView;
 import com.cg.dto.Student;
 import com.cg.repository.EmployeeRepository;
 import com.cg.repository.StudentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
+@Slf4j
 class JpaDemoApplicationTests {
 	
 	@Autowired
@@ -72,10 +75,10 @@ class JpaDemoApplicationTests {
 		void init() {
 			pageable = Pageable.unpaged();
 			employeeRepository.saveAll(Arrays.asList(
-					new Employee(1, "John", "Manager", 100000L),
-					new Employee(2, "Jane", "Developer", 200000L),
-					new Employee(3, "Jack", "Developer", 300000L),
-					new Employee(4, "Jill", "Manager", 400000L)));
+					new Employee(1, "John", "Doe", "Manager", 100000L),
+					new Employee(2, "Jane", "Doe", "Developer", 200000L),
+					new Employee(3, "Jack", "Jones", "Developer", 300000L),
+					new Employee(4, "Jill", "Smith", "Manager", 400000L)));
 		}
 
 		private List<Employee> getEmployees(final Map<String, String> filters) {
@@ -86,7 +89,7 @@ class JpaDemoApplicationTests {
 		@DisplayName("Find by name")
 		void testFindByName() {
 			final Map<String, String> filters = new HashMap<>();
-			filters.put(Constants.NAME, "John");
+			filters.put(Constants.FIRST_NAME, "John");
 			final List<Employee> employees = getEmployees(filters);
 			assertEquals(1, employees.size());
 		}
@@ -99,6 +102,14 @@ class JpaDemoApplicationTests {
 			filters.put(Constants.SALARY, "200000");
 			final List<Employee> employees = getEmployees(filters);
 			assertEquals(2, employees.size());
+		}
+
+		@Test
+		@DisplayName("Testing projection")
+		void testProjection() {
+			final List<EmployeeView> employees = employeeRepository.findByFirstName("John");
+			employees.forEach(employee -> log.info("Employee Projection: name = {}, designation = {}", employee.getFullName(), employee.getDesignation()));
+			assertEquals(1, employees.size());
 		}
 
 	}

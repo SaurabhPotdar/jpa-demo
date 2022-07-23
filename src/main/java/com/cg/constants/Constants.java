@@ -2,7 +2,7 @@ package com.cg.constants;
 
 public class Constants {
 
-    public static final String NAME = "name";
+    public static final String FIRST_NAME = "firstName";
 
     public static final String DESIGNATION = "designation";
 

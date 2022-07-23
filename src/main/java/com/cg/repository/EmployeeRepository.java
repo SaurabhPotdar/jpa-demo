@@ -2,6 +2,7 @@ package com.cg.repository;
 
 import com.cg.constants.Constants;
 import com.cg.dto.Employee;
+import com.cg.dto.EmployeeView;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -15,6 +16,7 @@ import java.util.Map;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>, JpaSpecificationExecutor<Employee> {
 
+    List<EmployeeView> findByFirstName(final String firstName);
 
     class FiltersUtils {
         private FiltersUtils() {
@@ -25,8 +27,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>, Jp
             return (root, query, criteriaBuilder) -> {
                 final List<Predicate> predicates = new ArrayList<>();
                 //Like
-                if (filters.containsKey(Constants.NAME) && filters.get(Constants.NAME) != null) {
-                    predicates.add(criteriaBuilder.like(root.get(Constants.NAME), filters.get(Constants.NAME)));
+                if (filters.containsKey(Constants.FIRST_NAME) && filters.get(Constants.FIRST_NAME) != null) {
+                    predicates.add(criteriaBuilder.like(root.get(Constants.FIRST_NAME), filters.get(Constants.FIRST_NAME)));
                 }
                 //Equal
                 if (filters.get(Constants.DESIGNATION) != null) {
