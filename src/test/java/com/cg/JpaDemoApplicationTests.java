@@ -24,52 +24,58 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DataJpaTest
 @Slf4j
 class JpaDemoApplicationTests {
-	
-	@Autowired
-	private StudentRepository studentRepository;
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
-	
-	@BeforeEach
-	public void init() {
-		studentRepository.saveAll(Arrays.asList(
-				new Student("AB","CD",null),
-				new Student("EF","GH",null),
-				new Student("IJ","KL",null),
-				new Student("MN","OP",null)));
-	}
-	
-	@AfterEach
-	public void delete() {
-		studentRepository.deleteAll();
-	}
+	@Nested
+	@DisplayName("Student Tests")
+	@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+	class StudentTests {
 
-	@Test
-	void testFindAll() {
-		Student student = new Student("QR","ST",null);
-		assertNotNull(studentRepository.save(student));
-		assertEquals(5, studentRepository.count());
-	}
-	
-	@Test
-	void testFindByLastnameOrFirstnameNamedQuery() {
-		assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
-		assertEquals(2, studentRepository.findByLastnameOrFirstnameNamedQuery("AB", "GH", PageRequest.of(0, 10)).size());
-	}
-	
-	@Test
-	void testFindByName() {
-		assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
-		assertEquals(2, studentRepository.findByName("AB", "GH", 0, 10).size());
-	}
+		@Autowired
+		private StudentRepository studentRepository;
 
+		@BeforeEach
+		public void init() {
+			studentRepository.saveAll(Arrays.asList(
+					new Student("AB","CD",null),
+					new Student("EF","GH",null),
+					new Student("IJ","KL",null),
+					new Student("MN","OP",null)));
+		}
+
+		@AfterEach
+		public void delete() {
+			studentRepository.deleteAll();
+		}
+
+		@Test
+		void testFindAll() {
+			Student student = new Student("QR","ST",null);
+			assertNotNull(studentRepository.save(student));
+			assertEquals(5, studentRepository.count());
+		}
+
+		@Test
+		void testFindByLastnameOrFirstnameNamedQuery() {
+			assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
+			assertEquals(2, studentRepository.findByLastnameOrFirstnameNamedQuery("AB", "GH", PageRequest.of(0, 10)).size());
+		}
+
+		@Test
+		void testFindByName() {
+			assertEquals(4, studentRepository.count());  //Each test is transactional and rollback
+			assertEquals(2, studentRepository.findByName("AB", "GH", 0, 10).size());
+		}
+
+	}
+	
 	@Nested
 	@DisplayName("Employee Tests")
 	@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 	class EmployeeTests {
 
-		Pageable pageable;
+		@Autowired
+		private EmployeeRepository employeeRepository;
+		private Pageable pageable;
 
 		@BeforeAll
 		void init() {
