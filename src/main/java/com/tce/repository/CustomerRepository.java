@@ -1,8 +1,8 @@
-package com.cg.repository;
+package com.tce.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.cg.dto.Customer;
+import com.tce.dto.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 

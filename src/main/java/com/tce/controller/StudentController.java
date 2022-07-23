@@ -1,4 +1,4 @@
-package com.cg.controller;
+package com.tce.controller;
 
 import java.util.Set;
 
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cg.dto.Course;
-import com.cg.dto.Student;
-import com.cg.repository.CourseRepository;
-import com.cg.repository.StudentRepository;
+import com.tce.dto.Course;
+import com.tce.dto.Student;
+import com.tce.repository.CourseRepository;
+import com.tce.repository.StudentRepository;
 
 @RestController
 @RequestMapping("/students")

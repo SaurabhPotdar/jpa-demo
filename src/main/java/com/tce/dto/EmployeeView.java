@@ -1,4 +1,4 @@
-package com.cg.dto;
+package com.tce.dto;
 
 import org.springframework.beans.factory.annotation.Value;
 

@@ -1,4 +1,4 @@
-package com.cg;
+package com.tce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

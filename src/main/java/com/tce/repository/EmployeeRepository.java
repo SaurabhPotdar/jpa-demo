@@ -1,8 +1,8 @@
-package com.cg.repository;
+package com.tce.repository;
 
-import com.cg.constants.Constants;
-import com.cg.dto.Employee;
-import com.cg.dto.EmployeeView;
+import com.tce.constants.Constants;
+import com.tce.dto.Employee;
+import com.tce.dto.EmployeeView;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

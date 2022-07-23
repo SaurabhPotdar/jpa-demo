@@ -1,8 +1,8 @@
-package com.cg.repository;
+package com.tce.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.cg.dto.Order;
+import com.tce.dto.Order;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 

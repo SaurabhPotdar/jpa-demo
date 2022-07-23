@@ -1,8 +1,8 @@
-package com.cg.repository;
+package com.tce.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.cg.dto.Course;
+import com.tce.dto.Course;
 
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 

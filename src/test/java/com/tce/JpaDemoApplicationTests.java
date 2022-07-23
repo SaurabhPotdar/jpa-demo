@@ -1,11 +1,11 @@
-package com.cg;
+package com.tce;
 
-import com.cg.constants.Constants;
-import com.cg.dto.Employee;
-import com.cg.dto.EmployeeView;
-import com.cg.dto.Student;
-import com.cg.repository.EmployeeRepository;
-import com.cg.repository.StudentRepository;
+import com.tce.constants.Constants;
+import com.tce.dto.Employee;
+import com.tce.dto.EmployeeView;
+import com.tce.dto.Student;
+import com.tce.repository.EmployeeRepository;
+import com.tce.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @Slf4j
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class JpaDemoApplicationTests {
 
 	@Nested

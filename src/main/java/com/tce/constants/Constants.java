@@ -1,4 +1,4 @@
-package com.cg.constants;
+package com.tce.constants;
 
 public class Constants {
 
