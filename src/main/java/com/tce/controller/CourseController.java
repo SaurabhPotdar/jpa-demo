@@ -22,7 +22,7 @@ public class CourseController {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<?> findById(@PathVariable int id) {
-		return new ResponseEntity<Course>(courseRepository.findById(id).orElse(null), HttpStatus.OK);
+		return new ResponseEntity<>(courseRepository.findById(id).orElse(null), HttpStatus.OK);
 	}
 	
 	@GetMapping()

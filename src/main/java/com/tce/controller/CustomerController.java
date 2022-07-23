@@ -22,7 +22,7 @@ public class CustomerController {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<?> findById(@PathVariable int id) {
-		return new ResponseEntity<Customer>(customerRepository.findById(id).orElse(null), HttpStatus.OK);
+		return new ResponseEntity<>(customerRepository.findById(id).orElse(null), HttpStatus.OK);
 	}
 	
 	@GetMapping()
