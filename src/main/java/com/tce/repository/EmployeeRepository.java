@@ -3,6 +3,7 @@ package com.tce.repository;
 import com.tce.constants.Constants;
 import com.tce.dto.Employee;
 import com.tce.dto.EmployeeView;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -21,6 +22,14 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>, Jp
 
     @Query("SELECT e.firstName FROM Employee e WHERE e.designation = ?1")
     List<String> findByDesignation(final String designation);
+
+    @Query("SELECT e.firstName FROM Employee e WHERE e.salary >= ?1")
+    List<String> findBySalaryPaginated(final Long salary, final Pageable pageable);
+
+    @Query(value="select * from employees e where e.salary>= :salary",
+            nativeQuery=true,
+            countQuery = "select count(*) from employees e where e.salary>= :salary")
+    List<Employee> findBySalaryPaginatedNative(final Long salary, final Pageable pageable);
 
     class FiltersUtils {
         private FiltersUtils() {

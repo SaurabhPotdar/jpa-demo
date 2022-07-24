@@ -122,6 +122,20 @@ class JpaDemoApplicationTests {
 			assertEquals(0, employeeRepository.findByDesignation("Developer").size());
 		}
 
+		@Test
+		@DisplayName("Testing pagination with JPQL")
+		void testPaginationWithJpql() {
+			final List<String> names = employeeRepository.findBySalaryPaginated(100000L, PageRequest.of(0, 2));
+			assertEquals(2, names.size());
+		}
+
+		@Test
+		@DisplayName("Testing pagination with Native query")
+		void testPaginationWithNative() {
+			final List<Employee> employees = employeeRepository.findBySalaryPaginatedNative(100000L, PageRequest.of(0, 2));
+			assertEquals(2, employees.size());
+		}
+
 	}
 
 
