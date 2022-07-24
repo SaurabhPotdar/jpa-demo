@@ -13,10 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -114,6 +111,15 @@ class JpaDemoApplicationTests {
 			final List<EmployeeView> employees = employeeRepository.findByFirstName("John");
 			employees.forEach(employee -> log.info("Employee Projection: name = {}, designation = {}", employee.getFullName(), employee.getDesignation()));
 			assertEquals(1, employees.size());
+		}
+
+		@Test
+		@DisplayName("Testing find by designation")
+		void testFindByDesignation() {
+			final List<String> names = employeeRepository.findByDesignation("");
+			//Returns an empty list if no data found.
+			names.stream().map(employee -> employee.toUpperCase(Locale.ROOT)).forEach(log::info);
+			assertEquals(0, employeeRepository.findByDesignation("Developer").size());
 		}
 
 	}

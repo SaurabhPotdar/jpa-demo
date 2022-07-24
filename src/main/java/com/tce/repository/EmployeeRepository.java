@@ -6,6 +6,7 @@ import com.tce.dto.EmployeeView;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.Predicate;
@@ -17,6 +18,9 @@ import java.util.Map;
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>, JpaSpecificationExecutor<Employee> {
 
     List<EmployeeView> findByFirstName(final String firstName);
+
+    @Query("SELECT e.firstName FROM Employee e WHERE e.designation = ?1")
+    List<String> findByDesignation(final String designation);
 
     class FiltersUtils {
         private FiltersUtils() {
