@@ -1,7 +1,7 @@
 package com.tce.controller;
 
-import com.tce.dto.Customer;
-import com.tce.dto.Order;
+import com.tce.model.entity.Customer;
+import com.tce.model.entity.Order;
 import com.tce.repository.CustomerRepository;
 import com.tce.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;

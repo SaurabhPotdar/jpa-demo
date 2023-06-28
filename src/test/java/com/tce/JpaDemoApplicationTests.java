@@ -1,9 +1,9 @@
 package com.tce;
 
 import com.tce.constants.Constants;
-import com.tce.dto.Employee;
-import com.tce.dto.EmployeeView;
-import com.tce.dto.Student;
+import com.tce.model.entity.Employee;
+import com.tce.model.view.EmployeeView;
+import com.tce.model.entity.Student;
 import com.tce.repository.EmployeeRepository;
 import com.tce.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;

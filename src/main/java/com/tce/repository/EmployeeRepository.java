@@ -1,8 +1,8 @@
 package com.tce.repository;
 
 import com.tce.constants.Constants;
-import com.tce.dto.Employee;
-import com.tce.dto.EmployeeView;
+import com.tce.model.entity.Employee;
+import com.tce.model.view.EmployeeView;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

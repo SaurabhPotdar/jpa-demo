@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tce.dto.Course;
-import com.tce.dto.Student;
+import com.tce.model.entity.Course;
+import com.tce.model.entity.Student;
 import com.tce.repository.CourseRepository;
 import com.tce.repository.StudentRepository;
 
