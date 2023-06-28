@@ -2,6 +2,11 @@ package com.tce.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "employees")
@@ -10,6 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@EntityListeners(AuditingEntityListener.class)
 public class Employee {
 
     @Id
@@ -24,5 +30,13 @@ public class Employee {
     private String designation;
 
     private Long salary;
+
+    @Column(name = "created_date")
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    @Column(name = "last_modified_date")
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 
 }

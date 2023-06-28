@@ -3,7 +3,11 @@ package com.tce.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "courses"})
+@EntityListeners(AuditingEntityListener.class)
 public class Student {
 
 	@Id
@@ -33,6 +38,14 @@ public class Student {
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
 	private Set<Course> courses = new HashSet<>();
+
+	@Column(name = "created_date")
+	@CreatedDate
+	private LocalDateTime createdDate;
+
+	@Column(name = "last_modified_date")
+	@LastModifiedDate
+	private LocalDateTime lastModifiedDate;
 	
 	public Student(String firstName, String lastName, Set<Course> courses) {
 		this.firstName = firstName;
