@@ -2,26 +2,32 @@ package com.tce;
 
 import com.tce.constants.Constants;
 import com.tce.model.entity.Employee;
-import com.tce.model.view.EmployeeView;
 import com.tce.model.entity.Student;
+import com.tce.model.view.EmployeeView;
 import com.tce.repository.EmployeeRepository;
 import com.tce.repository.StudentRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
-@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class JpaDemoApplicationTests {
+
+	final Logger log = LoggerFactory.getLogger(JpaDemoApplicationTests.class);
 
 	@Nested
 	@DisplayName("Student Tests")
@@ -33,7 +39,7 @@ class JpaDemoApplicationTests {
 
 		@BeforeAll
 		public void init() {
-			studentRepository.saveAll(Arrays.asList(
+			studentRepository.saveAll(List.of(
 					new Student("AB","CD",null),
 					new Student("EF","GH",null),
 					new Student("IJ","KL",null),
@@ -70,11 +76,9 @@ class JpaDemoApplicationTests {
 
 		@Autowired
 		private EmployeeRepository employeeRepository;
-		private Pageable pageable;
 
 		@BeforeAll
 		void init() {
-			pageable = Pageable.unpaged();
 			employeeRepository.saveAll(Arrays.asList(
 					new Employee(1, "John", "Doe", "Manager", 100000L),
 					new Employee(2, "Jane", "Doe", "Developer", 200000L),
@@ -83,7 +87,7 @@ class JpaDemoApplicationTests {
 		}
 
 		private List<Employee> getEmployees(final Map<String, String> filters) {
-			return employeeRepository.findAll(EmployeeRepository.FiltersUtils.findBy(filters), pageable).getContent();
+			return employeeRepository.findAll(EmployeeRepository.FiltersUtils.findBy(filters), Pageable.unpaged()).getContent();
 		}
 
 		@Test
@@ -116,10 +120,8 @@ class JpaDemoApplicationTests {
 		@Test
 		@DisplayName("Testing find by designation")
 		void testFindByDesignation() {
-			final List<String> names = employeeRepository.findByDesignation("");
-			//Returns an empty list if no data found.
-			names.stream().map(employee -> employee.toUpperCase(Locale.ROOT)).forEach(log::info);
-			assertEquals(0, employeeRepository.findByDesignation("Developer").size());
+			assertEquals(0, employeeRepository.findByDesignation(StringUtils.EMPTY).size());
+			assertEquals(2, employeeRepository.findByDesignation("Developer").size());
 		}
 
 		@Test

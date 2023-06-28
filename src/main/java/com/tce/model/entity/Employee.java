@@ -39,4 +39,12 @@ public class Employee {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    public Employee(final int id, final String firstName, final String lastName, final String designation, final Long salary) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.designation = designation;
+        this.salary = salary;
+    }
+
 }
